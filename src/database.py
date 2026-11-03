@@ -1,5 +1,6 @@
 
 import sqlite3
+import math
 import pandas as pd
 from config import ROOT
 
@@ -25,22 +26,35 @@ def init():
         """)
 
 
+def validate_number(value, field, minimum, maximum=None):
+    try:
+        number = float(value)
+    except (TypeError, ValueError):
+        raise ValueError(f"{field} must be a valid number.")
+
+    if not math.isfinite(number):
+        raise ValueError(f"{field} must be finite.")
+
+    if number < minimum:
+        raise ValueError(f"{field} cannot be below {minimum}.")
+
+    if maximum is not None and number > maximum:
+        raise ValueError(f"{field} cannot exceed {maximum}.")
+
+    return number
+
+
 def save(u, r, a, risk, ids, act, p):
-    # Validate transaction amount
-    if float(a) < 0:
-        raise ValueError("Transaction amount cannot be negative.")
+    if not isinstance(u, str) or not u.strip():
+        raise ValueError("User reference cannot be empty.")
 
-    # Validate risk score
-    if not 0 <= float(risk) <= 100:
-        raise ValueError("Risk score must be between 0 and 100.")
+    if not isinstance(r, str) or not r.strip():
+        raise ValueError("Recipient reference cannot be empty.")
 
-    # Validate Intent Drift Score
-    if not 0 <= float(ids) <= 100:
-        raise ValueError("Intent Drift Score must be between 0 and 100.")
-
-    # Validate model probability (percentage)
-    if not 0 <= float(p) <= 100:
-        raise ValueError("Probability must be between 0 and 100.")
+    a = validate_number(a, "Amount", 0)
+    risk = validate_number(risk, "Risk score", 0, 100)
+    ids = validate_number(ids, "Intent Drift Score", 0, 100)
+    p = validate_number(p, "Probability", 0, 100)
 
     if act not in ["ALLOW", "VERIFY", "PROTECT"]:
         raise ValueError("Invalid payment decision.")
@@ -48,16 +62,13 @@ def save(u, r, a, risk, ids, act, p):
     init()
 
     with sqlite3.connect(DB) as c:
-        c.execute(
-            """
+        c.execute("""
             INSERT INTO assessments(
                 user_ref, recipient_ref, amount,
                 risk, ids, action, probability
             )
             VALUES (?, ?, ?, ?, ?, ?, ?)
-            """,
-            (u, r, a, risk, ids, act, p)
-        )
+        """, (u.strip(), r.strip(), a, risk, ids, act, p))
 
 
 def history():
@@ -67,4 +78,3 @@ def history():
         return pd.read_sql_query(
             "SELECT * FROM assessments ORDER BY id DESC", c
         )
-
