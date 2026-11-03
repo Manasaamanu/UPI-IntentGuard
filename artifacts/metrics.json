@@ -1,0 +1,11 @@
+{
+  "accuracy": 0.6857142857142857,
+  "precision": 0.1104,
+  "recall": 0.5348837209302325,
+  "f1": 0.1830238726790451,
+  "roc_auc": 0.6323142773678128,
+  "test_samples": 1960,
+  "train_users": 280,
+  "test_users": 70,
+  "note": "Synthetic demo only. User-level holdout split; these results do not represent real-world UPI fraud performance."
+}

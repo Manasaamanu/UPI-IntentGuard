@@ -1,0 +1,2 @@
+accuracy,precision,recall,f1,roc_auc,pr_auc,brier_score,threshold_selected_on_validation,best_epoch,test_samples,test_users,train_users,validation_users,confusion_matrix,note
+0.7459568733153639,0.11924119241192412,0.4583333333333333,0.18924731182795698,0.667274555715658,0.1555939401337119,0.20534396171569824,0.5500000000000002,4,1484,53,245,52,"{'tn': 1063, 'fp': 325, 'fn': 52, 'tp': 44}",Synthetic academic prototype only. User-level train/validation/test split. Scenario column excluded. Not evidence of real-world UPI fraud performance.

@@ -1,0 +1,5 @@
+outs:
+- md5: 3f58320670f10602a758c5f8dac715ae
+  size: 705469
+  hash: md5
+  path: synthetic_transactions.csv
