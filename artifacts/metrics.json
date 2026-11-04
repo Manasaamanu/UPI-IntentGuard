@@ -1,11 +1,24 @@
 {
-  "accuracy": 0.6857142857142857,
-  "precision": 0.1104,
-  "recall": 0.5348837209302325,
-  "f1": 0.1830238726790451,
-  "roc_auc": 0.6323142773678128,
-  "test_samples": 1960,
-  "train_users": 280,
-  "test_users": 70,
-  "note": "Synthetic demo only. User-level holdout split; these results do not represent real-world UPI fraud performance."
+  "accuracy": 0.8059299191374663,
+  "precision": 0.10317460317460317,
+  "recall": 0.29545454545454547,
+  "f1": 0.15294117647058825,
+  "roc_auc": 0.6216381219067465,
+  "pr_auc": 0.10581578659906045,
+  "brier_score": 0.1895976960659027,
+  "threshold_selected_on_validation": 0.6558237671852112,
+  "best_validation_pr_auc": 0.19290863561487512,
+  "best_epoch": 13,
+  "epochs_trained": 18,
+  "test_samples": 1484,
+  "train_users": 244,
+  "validation_users": 53,
+  "test_users": 53,
+  "confusion_matrix": {
+    "tn": 1170,
+    "fp": 226,
+    "fn": 62,
+    "tp": 26
+  },
+  "note": "Synthetic academic prototype only. User-level train, validation and test split. Threshold selected on validation data. Not evidence of real-world UPI fraud performance."
 }

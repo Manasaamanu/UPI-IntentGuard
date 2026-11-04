@@ -1,8 +1,8 @@
-              precision    recall  f1-score   support
+                        precision    recall  f1-score   support
 
-           0       0.96      0.70      0.81      1831
-           1       0.11      0.53      0.18       129
+               Genuine       0.95      0.84      0.89      1396
+Simulated manipulation       0.10      0.30      0.15        88
 
-    accuracy                           0.69      1960
-   macro avg       0.53      0.62      0.49      1960
-weighted avg       0.90      0.69      0.76      1960
+              accuracy                           0.81      1484
+             macro avg       0.53      0.57      0.52      1484
+          weighted avg       0.90      0.81      0.85      1484
